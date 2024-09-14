@@ -11,8 +11,8 @@ class DrinkScreen {
   String description;
   Color lightColor;
   Color dartColor;
-
+  final String quote;
   DrinkScreen(this.name, this.conName, this.backgroundImage, this.imageTop,
   this.imageSmall, this.imageBlur, this.cupImage, this.description,
-      this.lightColor, this.dartColor);
+      this.lightColor, this.dartColor, this.quote);
 }

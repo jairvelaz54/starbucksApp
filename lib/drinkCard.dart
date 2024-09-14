@@ -11,8 +11,9 @@ class DrinkCard extends StatelessWidget {
   double animate = 0;
   double columnAnimation = 0;
   double rotate = 0;
+  final VoidCallback onPress; // Agregar este parámetro para manejar la acción
 
-  DrinkCard(this.drink, this.pageOffset, this.index);
+  DrinkCard(this.drink, this.pageOffset, this.index,{required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,14 @@ class DrinkCard extends StatelessWidget {
           buildBlurImage(cardWidth, size),
           buildSmallImage(size),
           buildTopImage(cardWidth, cardHeight, size),
+          Positioned(
+            right: 20,
+            bottom: 20,
+            child: ElevatedButton(
+              onPressed: onPress,  // Función para mostrar el diálogo
+              child: Text('Mostrar diálogo'),
+            ),
+          ),
         ],
       ),
     );

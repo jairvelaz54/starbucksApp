@@ -103,7 +103,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               ..scale(1 + (1 - animation!.value)),
             origin: Offset(25, 25),
             child: InkWell(
-              onTap: () => controller!.isCompleted ? controller!.reverse() : controller!.forward(),
+              onTap: () => controller!.isCompleted
+                  ? controller!.reverse()
+                  : controller!.forward(),
               child: Image.asset("images/logo2.png", width: 50, height: 50),
             ),
           );
@@ -124,11 +126,39 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             child: PageView.builder(
               controller: pageController,
               itemCount: getDrinks().length,
-              itemBuilder: (context, index) => DrinkCard(getDrinks()[index], pageOffset, index),
+              itemBuilder: (context, index) {
+                final drink = getDrinks()[index];
+                return DrinkCard(
+                  drink,
+                  pageOffset,
+                  index,
+                  onPress: () => showCharacterDialog(drink.name, drink.quote),
+                );
+              },
             ),
           );
         },
       ),
+    );
+  }
+
+  void showCharacterDialog(String name, String quote) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$name dice:'),
+          content: Text(quote),
+          actions: [
+            TextButton(
+              child: Text('Cerrar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -145,6 +175,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         'Has llegado a comprender el camino de las explosiones, Kazuma. ¿Qué te parece?',
         mRedLight,
         mRed,
+              'Has llegado a comprender el camino de las explosiones, Kazuma. ¿Qué te parece?', // Cita de Megumin
+
       ),
       DrinkScreen(
         'Kazu',
@@ -157,6 +189,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         '¡Adiós vida aburrida! ¡Hola nuevo mundo!"',
         greenLight,
         greenDark,
+              '¡Adiós vida aburrida! ¡Hola nuevo mundo!', // Cita de Kazuma
+
       ),
       DrinkScreen(
         'Aq',
@@ -169,6 +203,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         '¡Soy una diosa! ¡No me trates como a una simple mortal!.',
         mBlueLight,
         mBlue,
+              '¡Soy una diosa! ¡No me trates como a una simple mortal!.', // Cita de Aqua
+
       ),
     ];
   }
@@ -183,7 +219,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           child: Opacity(
             opacity: controller!.value,
             child: Row(
-              children: List.generate(getDrinks().length, (index) => buildContainer(index)),
+              children: List.generate(
+                  getDrinks().length, (index) => buildContainer(index)),
             ),
           ),
         );
@@ -198,14 +235,16 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
     if (animate <= 1) {
       size = 10 + 10 * (1 - animate);
-      color = ColorTween(begin: Colors.grey, end: mAppGreen).transform(1 - animate)!;
+      color = ColorTween(begin: Colors.grey, end: mAppGreen)
+          .transform(1 - animate)!;
     }
 
     return Container(
       margin: EdgeInsets.all(4),
       height: size,
       width: size,
-      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
+      decoration:
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
     );
   }
 }
