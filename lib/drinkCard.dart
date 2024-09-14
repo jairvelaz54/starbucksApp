@@ -30,7 +30,7 @@ class DrinkCard extends StatelessWidget {
     }
     animation = Curves.easeOutBack.transform(page);
     animate = 80 * (count + animation);  // Ajustar para reducir el desplazamiento
-    columnAnimation = 40 * (index - pageOffset);  // Ajuste del desplazamiento de la columna
+    columnAnimation = 10 * (index - pageOffset);  // Ajuste del desplazamiento de la columna
 
     return Container(
       child: Stack(
@@ -110,7 +110,7 @@ class DrinkCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Frappuccino',
+                'Personaje',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
@@ -122,47 +122,7 @@ class DrinkCard extends StatelessWidget {
                 drink.description,
                 style: TextStyle(color: Colors.white70, fontSize: 18),
               ),
-              Spacer(),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  SizedBox(width: 5),
-                  Image.asset('images/cup_L.png'),
-                  SizedBox(width: 5),
-                  Image.asset('images/cup_M.png'),
-                  SizedBox(width: 5),
-                  Image.asset('images/cup_s.png'),
-                ],
-              ),
-              SizedBox(height: 10),
-              Container(
-                height: 40,
-                decoration: BoxDecoration(
-                  color: mAppGreen,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      SizedBox(width: 20),
-                      Text(
-                        '\$',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        '4.',
-                        style: TextStyle(fontSize: 19, color: Colors.white),
-                      ),
-                      Text(
-                        '70',
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                         
             ],
           ),
         ),
